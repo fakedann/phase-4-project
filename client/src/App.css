@@ -1,1 +1,22 @@
+.nav {
+  height: 80px;
+  display: flex;
+  color: white;
+  background-color: #E07A5F;
+  padding-top: 20px;
+  justify-content: space-between;
+}
+
+.nav a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav ul{
+  color: white;
+  display: flex;
+  gap: 1rem;
+
+}
+
 

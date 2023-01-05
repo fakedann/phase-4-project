@@ -1,10 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom"
 
 function NavBar(){
   return (
-    <div id="navnav">
-      <p>hola</p>
-    </div>
+    <nav className="nav">
+      <ul>
+        <Link to="/">Home</Link>
+        <Link to="/log-or-sign">Log In or Sign Up</Link>
+      </ul>
+    </nav>
   )
 }
 
