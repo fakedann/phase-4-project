@@ -7,10 +7,13 @@ import LogOrSign from './LogOrSign';
 
 function App() {
   return (
-    <Routes>
+    <div className="app">
+      <Routes>
       <Route exact path="/" element={<Home />}/>
       <Route exact path="/log-or-sign" element={<LogOrSign />}/>
     </Routes>
+    </div>
+
   );
 }
 
