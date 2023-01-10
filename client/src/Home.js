@@ -5,13 +5,15 @@ import 'react-toastify/dist/ReactToastify.css';
 function Home(){
 
   const [formData, setFormData] = useState({
+    email: '',
+    password: '',
     fullname: '',
     phone: '',
     address: '',
     role: '',
   });
 
-  const notvalid = () => toast("One of your fields has at least one invalid character. Please, try again.", {position: toast.POSITION.TOP_CENTER})
+  const notvalid = () => toast("One of your fields has at least one invalid character. Passwords must be at least 6 characters long. Please, try again.", {position: toast.POSITION.TOP_CENTER})
 
   function handleChange(event) {
     const name = event.target.name;
@@ -25,19 +27,18 @@ function Home(){
 
   function checkSubmit(event){
     event.preventDefault()
+    const email = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
     const letters = /^[A-Za-z ]+$/
     const address = /^[a-zA-Z 0-9_.-]*$/
     const phone = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/
     const positions = ['server', 'host', 'cook']
 
-    if(letters.test(formData.fullname) && address.test(formData.address) && phone.test(formData.phone) && positions.find( element => element === formData.role)){
+    if(email.test(formData.email) && formData.password.length > 5 &&letters.test(formData.fullname) && address.test(formData.address) && phone.test(formData.phone) && positions.find( element => element === formData.role)){
       
       handleSubmit()
     }else{
-      
       notvalid()
     }
-
   }
 
   function handleSubmit() {
@@ -50,8 +51,25 @@ function Home(){
       <h1 className="title">Welcome tofreelancing</h1>
       <h3>In here, you can become a part of our Restaurant community that provides flexible hours and competitive rates. If you are not part of the family yet, sign up below!</h3>
       <div id="aboutBox">
-        
           <form onSubmit={checkSubmit}>
+          <div className="formElement">
+              <label>Email:</label>
+              <input
+                type="text"
+                name="email"
+                onChange={handleChange}
+                value={formData.email}
+              />
+            </div>
+            <div className="formElement">
+              <label>Password:</label>
+              <input
+                type="text"
+                name="password"
+                onChange={handleChange}
+                value={formData.password}
+              />
+            </div>
             <div className="formElement">
               <label>Name:</label>
               <input
@@ -61,7 +79,6 @@ function Home(){
                 value={formData.fullname}
               />
             </div>
-            
             <div className="formElement">
               <label>Phone:</label>
               <input
