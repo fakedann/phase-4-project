@@ -10,8 +10,9 @@ function Login({ onLogin }) {
       <div className="mainBox">
           {showLogin ? (
           <>
+            <p>If you already have an account, please sign in.</p>
             <LoginForm onLogin={onLogin} />
-            <p>
+            <p className="bottomP">
               Don't have an account? &nbsp;
               <button color="secondary" onClick={() => setShowLogin(false)}>
                 Sign Up
@@ -21,7 +22,7 @@ function Login({ onLogin }) {
         ) : (
           <>
             <SignUpForm onLogin={onLogin} />
-            <p>
+            <p className="bottomP">
               Already have an account? &nbsp;
               <button color="secondary" onClick={() => setShowLogin(true)}>
                 Log In

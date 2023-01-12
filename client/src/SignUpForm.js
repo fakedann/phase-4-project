@@ -14,7 +14,7 @@ function SignUpForm({ onLogin }){
     });
     const [errors, setErrors] = useState([]);
   
-    const notvalid = () => toast("One of your fields has at least one invalid character. Passwords must be at least 6 characters long. Please, try again.", {position: toast.POSITION.TOP_CENTER})
+    // const notvalid = () => toast("One of your fields has at least one invalid character. Passwords must be at least 6 characters long. Please, try again.", {position: toast.POSITION.TOP_CENTER})
   
     function handleChange(event) {
       const name = event.target.name;
@@ -38,15 +38,15 @@ function SignUpForm({ onLogin }){
         
         handleSubmit()
       }else{
-        console.log('im in not valid')
-        notvalid()
+        // notvalid()
+        setErrors(["One of your fields has at least one invalid character. Please, try again."])
       }
     }
   
     function handleSubmit() {
-    
+      console.log('in submit')
       setErrors([]);
-      fetch("/signup", {
+    fetch("/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ function SignUpForm({ onLogin }){
                 />
               </div>
               <div className="formElement">
-                <label>Password:</label>
+                <label>Password (+5):</label>
                 <input
                   type="text"
                   name="password"

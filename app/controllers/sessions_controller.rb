@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       # byebug
       render json: employee, status: :created
     else
-      render json: {errors: ["a kay"]}, status: :unauthorized
+      render json: {errors: ["Invalid email or password. Please, try again."]}, status: :unauthorized
     end
   end
 

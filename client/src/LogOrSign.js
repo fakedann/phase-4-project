@@ -16,7 +16,7 @@ function LogOrSign({setUser, user}){
       <p>hola {user.fullname}</p>
       <button variant="outline" onClick={handleLogoutClick}>
           Logout
-        </button>
+      </button>
     </div>
     
   )

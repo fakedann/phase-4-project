@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from "react";
 import Login from './Login';
-import SignUpForm from './SignUpForm';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -28,7 +27,7 @@ function App() {
   return (
     <div className="app">
       <Routes>
-        <Route exact path="/" element={<LogOrSign user={user} setUser={setUser}/>}/>
+        <Route exact path="/" element={<Home user={user} setUser={setUser}/>}/>
         <Route exact path="/log-or-sign" element={<LogOrSign setUser={setUser}/>}/>
       </Routes>
       <ToastContainer />
