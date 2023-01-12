@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SignUpForm({ onLogin }){
+function SignUpForm({ onLogin, restaurants}){
 
     const [formData, setFormData] = useState({
       email: '',
@@ -11,6 +11,7 @@ function SignUpForm({ onLogin }){
       phone: '',
       address: '',
       role: '',
+      admin: 'false'
     });
     const [errors, setErrors] = useState([]);
   
@@ -33,9 +34,17 @@ function SignUpForm({ onLogin }){
       const address = /^[a-zA-Z 0-9_.-]*$/
       const phone = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/
       const positions = ['server', 'host', 'cook']
+      const emails = ['momoyaki@gmail.com', 'elzafiro@gmail.com']
   
       if(email.test(formData.email) && formData.password.length > 5 &&letters.test(formData.fullname) && address.test(formData.address) && phone.test(formData.phone) && positions.find( element => element === formData.role)){
-        
+
+        if( restaurants.find( element => element.email === formData.email)){
+          formData.admin = 'true'
+          setFormData({
+            ...formData,
+            admin: 'true',
+          });
+        }
         handleSubmit()
       }else{
         // notvalid()
@@ -44,7 +53,6 @@ function SignUpForm({ onLogin }){
     }
   
     function handleSubmit() {
-      console.log('in submit')
       setErrors([]);
     fetch("/signup", {
       method: "POST",

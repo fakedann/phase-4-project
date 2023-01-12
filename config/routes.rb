@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
   resources :employees
+  resources :restaurants
 
   post "/signup", to: "employees#create"
   post "/login", to: "sessions#create"

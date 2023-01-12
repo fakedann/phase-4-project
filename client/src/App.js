@@ -10,7 +10,9 @@ import Login from './Login';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [restaurants, setRestaurants] = useState([]);
   console.log(user)
+  console.log(restaurants)
 
   useEffect(() => {
     // auto-login
@@ -21,8 +23,17 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    // auto-login
+    fetch("/restaurants").then((r) => {
+      if (r.ok) {
+        r.json().then((rests) => setRestaurants(rests));
+      }
+    });
+  }, []);
 
-  if (!user) return <Login onLogin={setUser} />;
+
+  if (!user) return <Login onLogin={setUser} restaurants={restaurants}/>;
 
   return (
     <div className="app">

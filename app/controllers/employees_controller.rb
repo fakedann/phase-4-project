@@ -22,7 +22,7 @@ class EmployeesController < ApplicationController
   private
 
     def employee_params
-      params.permit(:email, :password, :fullname, :phone, :address, :role)
+      params.permit(:email, :password, :fullname, :phone, :address, :role, :admin)
     end
 
     def render_unprocessable_entity(invalid)
