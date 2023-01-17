@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SignUpForm({ onLogin, restaurants}){
+function SignUpForm({ onLogin}){
 
     const [formData, setFormData] = useState({
       email: '',
@@ -38,13 +38,6 @@ function SignUpForm({ onLogin, restaurants}){
   
       if(email.test(formData.email) && formData.password.length > 5 &&letters.test(formData.fullname) && address.test(formData.address) && phone.test(formData.phone) && positions.find( element => element === formData.role)){
 
-        if( restaurants.find( element => element.email === formData.email)){
-          formData.admin = 'true'
-          setFormData({
-            ...formData,
-            admin: 'true',
-          });
-        }
         handleSubmit()
       }else{
         // notvalid()

@@ -6,9 +6,11 @@ Rails.application.routes.draw do
 
   resources :employees
   resources :restaurants
+  resources :reviews
 
   post "/signup", to: "employees#create"
   post "/login", to: "sessions#create"
   get "/me", to: "employees#show"
   delete "/logout", to: "sessions#destroy"
+  post "/review", to: "reviews#create"
 end

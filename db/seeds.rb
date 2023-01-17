@@ -21,14 +21,13 @@ Restaurant.create!([{
   address: "1267 SW 31th PL",
   foodtype: "Vietnamese",
   email: "momoyaki@gmail.com",
+},
+{
+  name: "Gainesville Roadhouse",
+  phone: "3522234389",
+  address: "1222 NW 4TH AVE",
+  foodtype: "Southern",
+  email: "momoyaki@gmail.com",
 }
-])
 
-# Employee.create!({
-#   fullname: "Daniel Escalona",
-#   phone: "3523281468",
-#   address: "4578 NE 2nd Ave",
-#   role: "manager",
-#   email: "elzafiro@gmail.com",
-#   password_digest: Employee.digest('123456')
-# })
+])

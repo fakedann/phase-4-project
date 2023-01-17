@@ -2,8 +2,20 @@ import { useState } from "react";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 
-function Login({ onLogin, restaurants }) {
+function Login({ user, onLogin, setUser}) {
   const [showLogin, setShowLogin] = useState(true);
+
+  if (user) return <div><p id="welcome">Welcome to Freelancing, {user.fullname}! We hope you enjoy all of the opportunities we offer</p><button variant="outline" onClick={handleLogoutClick}>
+  Logout
+</button></div>;
+
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      }
+    });
+  }
 
   return (
     
@@ -21,7 +33,7 @@ function Login({ onLogin, restaurants }) {
           </>
         ) : (
           <>
-            <SignUpForm onLogin={onLogin} restaurants={restaurants}/>
+            <SignUpForm onLogin={onLogin}/>
             <p className="bottomP">
               Already have an account? &nbsp;
               <button color="secondary" onClick={() => setShowLogin(true)}>

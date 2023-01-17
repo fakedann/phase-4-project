@@ -76,3 +76,30 @@ html {
   padding-bottom: 30px;
 }
 
+#welcome {
+  text-align: center;
+  padding-top: 70px;
+}
+
+#reviewDiv {
+  margin: 0 auto;
+  width: 800px;
+  height: auto;
+  flex-flow: wrap;
+  justify-content: space-around;
+}
+
+#restSelect {
+  width: 130px;
+}
+
+#submitReview {
+  margin-top: 20px;
+  margin-left: 380px;
+}
+
+#reviewDiv h3{
+  display: block;
+  text-align: center;
+  padding-top: 30px;
+}
