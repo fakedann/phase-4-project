@@ -26,10 +26,12 @@ function App() {
 
   }, []);
 
+  if (!user) return <Login user={user} onLogin={setUser} setUser={setUser}/>
+
   return (
     <div className="app">
       <Routes>
-        <Route exact path="/" element={<Login user={user} onLogin={setUser} setUser={setUser}/>}/>
+        <Route exact path="/" element={<Home user={user} setUser={setUser}/>}/>
         <Route exact path="/review" element={<CreateReview user={user}/>}/>
       </Routes>
       <ToastContainer />

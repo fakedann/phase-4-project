@@ -6,7 +6,6 @@ function CreateReview( {user} ){
     restaurant: '',
     rate: '',
     comments: ''
-   
   });
 
   const [errors, setErrors] = useState([]);

@@ -3,6 +3,6 @@ class RestaurantsController < ApplicationController
  
   def index
     rests = Restaurant.all
-    render json: rests, only: [:name, :id], status: :created
+    render json: rests, include: :reviews, status: :created
   end
 end
