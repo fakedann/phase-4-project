@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Card from 'react-bootstrap/Card';
 
 function Home({user, setUser}){
 
