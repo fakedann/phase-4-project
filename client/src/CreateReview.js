@@ -5,7 +5,7 @@ function CreateReview( {user} ){
   const [review, setReview] = useState({
     restaurant: '',
     rate: '',
-    comments: ''
+    comments: '',
   });
 
   const [errors, setErrors] = useState([]);
@@ -28,10 +28,10 @@ function CreateReview( {user} ){
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({empl_id: user.id,
-        rest_id: review.restaurant,
+      body: JSON.stringify({employee_id: user.id,
+        restaurant_id: review.restaurant,
         rate: review.rate,
-        comments: review.comments
+        comments: review.comments,
       }),
     }).then((r) => {
       if (r.ok) {

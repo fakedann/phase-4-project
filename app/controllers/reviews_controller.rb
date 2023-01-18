@@ -13,11 +13,16 @@ class ReviewsController < ApplicationController
     render json: reviews, status: :created
   end
 
+  def show
+    reviews = Review.where(employee_id: params[:id])
+    render json: reviews, include: :restaurant, status: :created
+  end
+
 
   private
 
     def review_params
-      params.permit(:empl_id, :rest_id, :comments, :rate)
+      params.permit(:employee_id, :restaurant_id, :comments, :rate)
     end
 
     def render_not_found_response

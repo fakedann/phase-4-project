@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from "react";
 import Login from './Login';
+import Profile from './Profile';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home user={user} setUser={setUser}/>}/>
         <Route exact path="/review" element={<CreateReview user={user}/>}/>
+        <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />}/>
       </Routes>
       <ToastContainer />
   </div>

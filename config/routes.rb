@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get "/me", to: "employees#show"
   delete "/logout", to: "sessions#destroy"
   post "/review", to: "reviews#create"
+  get "/reviews/:id", to: "reviews#show"
 end
