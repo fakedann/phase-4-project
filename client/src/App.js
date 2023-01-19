@@ -1,13 +1,12 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import {Route, Routes} from "react-router-dom"
-import Home from './Home';
 import CreateReview from './CreateReview';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from "react";
 import Login from './Login';
-import Profile from './Profile';
+import Discover from './Discover';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -33,7 +32,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route exact path="/review" element={<CreateReview user={user}/>}/>
-        <Route exact path="/profile" element={<Profile user={user} setUser={setUser} />}/>
+        <Route exact path="/discover" element={<Discover user={user} setUser={setUser} />}/>
         <Route exact path="/" element={<Login user={user} onLogin={setUser} setUser={setUser}/>}/>
       </Routes>
       <ToastContainer />

@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   post "/review", to: "reviews#create"
   get "/reviews/:id", to: "reviews#show"
+  get "/reviews/5/:id", to: "reviews#last_five"
 end

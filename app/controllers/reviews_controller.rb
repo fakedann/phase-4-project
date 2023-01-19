@@ -18,6 +18,11 @@ class ReviewsController < ApplicationController
     render json: reviews, include: :restaurant, status: :created
   end
 
+  def last_five
+    reviews = Review.where(employee_id: params[:id])
+    render json: reviews.last(5), include: :restaurant, status: :created
+  end
+
 
   private
 

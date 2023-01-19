@@ -9,9 +9,7 @@ function SignUpForm({ onLogin}){
       password: '',
       fullname: '',
       phone: '',
-      address: '',
-      role: '',
-      admin: 'false'
+      address: ''
     });
     const [errors, setErrors] = useState([]);
   
@@ -33,10 +31,8 @@ function SignUpForm({ onLogin}){
       const letters = /^[A-Za-z ]+$/
       const address = /^[a-zA-Z 0-9_.-]*$/
       const phone = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/
-      const positions = ['server', 'host', 'cook']
-      const emails = ['momoyaki@gmail.com', 'elzafiro@gmail.com']
   
-      if(email.test(formData.email) && formData.password.length > 5 &&letters.test(formData.fullname) && address.test(formData.address) && phone.test(formData.phone) && positions.find( element => element === formData.role)){
+      if(email.test(formData.email) && formData.password.length > 5 &&letters.test(formData.fullname) && address.test(formData.address) && phone.test(formData.phone) ){
 
         handleSubmit()
       }else{
@@ -110,14 +106,6 @@ function SignUpForm({ onLogin}){
                   onChange={handleChange}
                   value={formData.address}
                 />
-              </div>
-              <div className="formElement">
-                <label>Role:</label>
-                <select value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})}>
-                    <option>---</option>
-                    <option value="server">Server</option>
-                    <option value="cook">Cook</option>
-                </select>
               </div>
               <button id="submit" type="submit">Submit</button>
               <div>{errors.map((err) => (
