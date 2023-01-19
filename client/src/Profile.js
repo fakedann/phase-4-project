@@ -13,17 +13,20 @@ function Profile({setUser, user}){
     });
   }, [])
 
-  function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
-      if (r.ok) {
-        setUser(null);
-      }
-    });
-  }
 
-  if(reviews.length > 1){
+  if(!user) return <p>Hola profile not logged in</p>
+  console.log(user)
+  console.log(reviews)
+
+  if(reviews.length >= 1){
     for(let i=reviews.length-1; i>reviews.length-6; i--){
-      lastFiveReviews.push(reviews[i])
+      console.log(i)
+      if(i>=0){
+        lastFiveReviews.push(reviews[i])
+      }
+      else{
+        break
+      }
     }
   }
 
@@ -33,16 +36,13 @@ function Profile({setUser, user}){
   return(<div>
     <p>inside profile</p>
     <div className="profileDiv">
-      {lastFiveReviews.map( (reviewObj) => <div className="card">
+      {lastFiveReviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
           <div className="container">
             <h4><b>{reviewObj.restaurant.name}</b></h4>
             <p>{reviewObj.comments}</p>
           </div>
           </div>)}
     </div>
-    <button variant="outline" onClick={handleLogoutClick}>
-          Logout
-      </button>
   </div>)
 }
 

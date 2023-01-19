@@ -7,12 +7,12 @@ import reportWebVitals from './reportWebVitals';
 import NavBar from './NavBar';
 
 ReactDOM.render(
-  <React.StrictMode>
+  
     <BrowserRouter>
       <NavBar />
       <App />
      </BrowserRouter> 
-  </React.StrictMode>,
+  ,
   document.getElementById('root')
 );
 

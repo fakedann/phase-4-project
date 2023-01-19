@@ -3,11 +3,25 @@ import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 
 function Login({ user, onLogin, setUser}) {
-  const [showLogin, setShowLogin] = useState(true);
 
-  if (user) return <div><p id="welcome">Welcome to Freelancing, {user.fullname}! We hope you enjoy all of the opportunities we offer</p><button variant="outline" onClick={handleLogoutClick}>
-  Logout
-</button></div>;
+  const [showLogin, setShowLogin] = useState(true);
+  
+
+  if (user) return (
+    <div className="welcomeDiv">
+      <h2>WELCOME</h2>
+      <div className="card-container">
+        <h3>{user.fullname}</h3>
+        <h6>{user.email}</h6>
+        <p>{user.address}</p>
+        <div className="buttons">
+          <button className="primary" onClick={handleLogoutClick}>
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {

@@ -18,7 +18,7 @@ function Home({user, setUser}){
 
   return (
     <div>
-      <p>hi you are home {user.fullname}</p>
+      <p>hi you are home</p>
       <div className="home">
         <div className="card">
           <div className="container">
