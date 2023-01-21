@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
 
   def create
     review = Review.create!(review_params)
-    render json: review, status: :created
+    render json: review, include: [:restaurant] status: :created
   end
 
   def index
