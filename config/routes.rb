@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   post "/review", to: "reviews#create"
   get "/reviews/:id", to: "reviews#show"
   get "/reviews/5/:id", to: "reviews#last_five"
+  patch "/review/:id", to: "reviews#update"
 end

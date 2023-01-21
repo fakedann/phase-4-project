@@ -1,55 +1,25 @@
 import React, { useEffect, useState } from "react";
+import Browse from "./Browse";
+import UpdateReview from "./UpdateReview";
 
 function Discover({setUser, user}){
 
-  const [reviews, setReviews] = useState([])
-  const lastFiveReviews = []
+  const [filterPageView, setNewFilter] = useState(<Browse user={user} changeView={changeView}/>)
 
-  useEffect( () => {
-    fetch(`/reviews/5/${user.id}`).then((r) => {
-      if (r.ok) {
-        r.json().then((rests) => setReviews(rests));
-      }
-    });
-  }, [])
+  
+  function changeView(found){
+    if(found){
+      setNewFilter(<UpdateReview user={user} review={found} changeView={changeView}/>)
+    }else{
+      setNewFilter(<Browse user={user} changeView={changeView}/>)
+    }
+  }
 
-  // if(!user){
-  //   return <p>Hola profile not logged in</p>
-  // }else{
-  //   // fetch(`/reviews/${user.id}`).then((r) => {
-  //   //   if (r.ok) {
-  //   //     r.json().then((resp) => setReviews(resp));
-  //   //   }
-  //   // });
-  //   console.log('loop')
-  // }
-
-  // if(reviews.length >= 1){
-  //   for(let i=reviews.length-1; i>reviews.length-6; i--){
-  //     console.log(i)
-  //     if(i>=0){
-  //       lastFiveReviews.push(reviews[i])
-  //     }
-  //     else{
-  //       break
-  //     }
-  //   }
-  // }
-
-
-  console.log(reviews)
-
-  return(<div>
-    <p>inside profile</p>
-    <div className="profileDiv">
-      {reviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
-          <div className="container">
-            <h4><b>{reviewObj.restaurant.name}</b></h4>
-            <p>{reviewObj.comments}</p>
-          </div>
-          </div>)}
+  return(
+    <div>
+      {user !== null ? filterPageView: <p>Please, log ing first</p>}
     </div>
-  </div>)
+  )
 }
 
 export default Discover

@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  skip_before_action :authorized, only: [:index, :show]
+  # skip_before_action :authorized, only: [:index, :show]
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   wrap_parameters format: []
 
@@ -10,17 +10,27 @@ class ReviewsController < ApplicationController
 
   def index
     reviews = Review.all
-    render json: reviews, status: :created
+    render json: reviews.last(8), include: [:restaurant, :employee], status: :created
   end
 
   def show
     reviews = Review.where(employee_id: params[:id])
-    render json: reviews, include: :restaurant, status: :created
+    render json: reviews, include: [:restaurant, :employee], status: :created
   end
 
   def last_five
     reviews = Review.where(employee_id: params[:id])
     render json: reviews.last(5), include: :restaurant, status: :created
+  end
+
+  def update
+    review = Review.find_by(id: params[:id])
+    if review
+      review.update!(rate: params[:rate], comments: params[:comments])
+      render json: review, include: [:restaurant, :employee], status: :created
+    else
+      render json: {error: "Review not found"}, status: :not_found
+    end
   end
 
 
