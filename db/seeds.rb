@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Restaurant.destroy_all
 Employee.destroy_all
+Review.destroy_all
 
 Restaurant.create!([{
   name: "El Zafiro",
