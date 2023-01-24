@@ -18,9 +18,7 @@ function App() {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => {
-          setUser(user)
-        });
+        r.json().then((user) => setUser(user));
       }
     });
 
@@ -32,7 +30,7 @@ function App() {
     <div className="app">
       <Routes>
         <Route exact path="/review" element={<CreateReview user={user}/>}/>
-        <Route exact path="/discover" element={<Discover user={user} setUser={setUser} />}/>
+        <Route exact path="/discover" element={<Discover user={user}/>}/>
         <Route exact path="/" element={<Login user={user} onLogin={setUser} setUser={setUser}/>}/>
       </Routes>
       <ToastContainer />

@@ -53,7 +53,6 @@ function UpdateReview({review, user, changeView}){
       <div className="cardUp">
           <div className="container">
             <h4><b>{review.restaurant.name}</b></h4>
-            <h6>By: {review.employee.fullname}</h6>
             <h6>Rate: {review.rate}</h6>
             <p>- {review.comments}</p>
           </div>

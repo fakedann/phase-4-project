@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import UpdateReview from "./UpdateReview";
 
 function Browse({changeView, user}){
 
@@ -6,7 +7,7 @@ function Browse({changeView, user}){
 
   useEffect( () => {
     
-    fetch(`/reviews`).then((r) => {
+    fetch(`/reviews/5/${user.id}`).then((r) => {
       if (r.ok) {
         r.json().then((rests) => setReviews(rests));
       }
@@ -18,9 +19,15 @@ console.log(reviews)
 console.log(user)
 
   function handleChange(event){
-    console.log(typeof parseInt(event.target.id))
-    let found = reviews.find( (reviewObj) => reviewObj.id === parseInt(event.target.id))
-    changeView(found)
+    console.log(event.target.className)
+    console.log(event.target.innerText)
+    let review = reviews.find( (reviewObj) => reviewObj.id === parseInt(event.target.className))
+  
+    if(event.target.innerText === "Change"){
+      changeView('update', review)
+    }else{
+      changeView('delete', review)
+    }
   
   }
 
@@ -28,16 +35,17 @@ console.log(user)
     <div>
     <p>inside Browse</p>
     <div className="profileDiv">
-      <button>Last 5 Reviews</button>
-      <button></button>
-      <button></button>
+      <button onClick={handleChange}>Last 5 Reviews</button>
+      <button onClick={event => changeView('update')}>Change A Review</button>
+      <button>Delete A Review</button>
+      <h3></h3>
       {reviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
           <div className="container">
             <h4><b>{reviewObj.restaurant.name}</b></h4>
-            <h6>By: {reviewObj.employee.fullname}</h6>
             <h6>Rate: {reviewObj.rate}</h6>
             <p>- {reviewObj.comments}</p>
-            {reviewObj.employee.id === user.id ? <button id={reviewObj.id} onClick={handleChange}>Change</button>: null}
+            <button className={reviewObj.id} onClick={handleChange}>Change</button>
+            <button className={reviewObj.id} onClick={handleChange}>Delete</button>
           </div>
           </div>)}
     </div>

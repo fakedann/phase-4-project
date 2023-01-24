@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   get "/reviews/:id", to: "reviews#show"
   get "/reviews/5/:id", to: "reviews#last_five"
   patch "/review/:id", to: "reviews#update"
+  delete "/review/:id", to: "reviews#destroy"
 end

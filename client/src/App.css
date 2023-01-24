@@ -154,7 +154,7 @@ button.primary.ghost {
 
 .welcomeDiv {
   text-align: center;
-  margin: auto;
+  margin: 0 auto;
   padding-top: 20px;
 }
 
@@ -174,4 +174,11 @@ button.primary.ghost {
   width: 300px;
   border-radius: 5px; /* 5px rounded corners */
   margin: auto;
+}
+
+#homeCollection {
+  padding-top: 50px;
+  display: inline-block;
+  margin: 0 auto;
+  padding-right: 100px;
 }

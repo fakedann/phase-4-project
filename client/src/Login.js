@@ -1,10 +1,21 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 
 function Login({ user, onLogin, setUser}) {
 
   const [showLogin, setShowLogin] = useState(true);
+  const [reviews, setReviews] = useState([])
+
+  useEffect( () => {
+    
+    fetch(`/reviews`).then((r) => {
+      if (r.ok) {
+        r.json().then((rests) => setReviews(rests));
+      }
+    });
+  
+  }, [])
   
 
   if (user) return (
@@ -19,6 +30,17 @@ function Login({ user, onLogin, setUser}) {
             Logout
           </button>
         </div>
+      </div>
+      <div id="homeCollection">
+        <h2>Latest Reviews!</h2>
+        {reviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
+          <div className="container">
+            <h4><b>{reviewObj.restaurant.name}</b></h4>
+            <h6>By: {reviewObj.employee.fullname}</h6>
+            <h6>Rate: {reviewObj.rate}</h6>
+            <p>- {reviewObj.comments}</p>
+          </div>
+          </div>)}
       </div>
     </div>
   );

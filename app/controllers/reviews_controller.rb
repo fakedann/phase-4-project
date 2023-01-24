@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
 
   def last_five
     reviews = Review.where(employee_id: params[:id])
-    render json: reviews.last(5), include: :restaurant, status: :created
+    render json: reviews.last(5), include: [:restaurant], status: :created
   end
 
   def update
@@ -32,6 +32,13 @@ class ReviewsController < ApplicationController
       render json: {error: "Review not found"}, status: :not_found
     end
   end
+
+  def destroy
+    review = Review.find_by(id: params[:id])
+    review.destroy
+    head :no_content
+  end
+
 
 
   private
