@@ -22,17 +22,8 @@ function Discover( {user} ){
   }
   
   function changeView(typeOfChange, newReview){
-    // if(typeOfChange === "update"){
-    //   setNewFilter(<UpdateReview user={user} review={review} changeView={changeView}/>)
-    // }else if(typeOfChange === "delete"){
-    //   setNewFilter(<DeleteReview user={user} review={review} changeView={changeView}/>)
-    // }else{
-    //   setNewFilter(<Browse user={user} changeView={changeView}/>)
-    // }
-    console.log('inside changeview')
     setNewFilter(typeOfChange)
     setReview(newReview)
-    
   }
 
  

@@ -2,24 +2,29 @@ import React, { useEffect, useState } from "react";
 
 function Browse({changeView, user}){
 
+  const [filterReviews, setFilter] = useState('1')
   const [reviews, setReviews] = useState([])
 
   useEffect( () => {
-    console.log('we start fetch in browse')
-    fetch(`/reviews/5/${user.id}`).then((r) => {
-      if (r.ok) {
-        r.json().then((rests) => setReviews(rests));
-      }
-    });
+    
+    if(filterReviews === '1'){
+      fetch(`/reviews/5/${user.id}`).then((r) => {
+        if (r.ok) {
+          r.json().then((rests) => setReviews(rests));
+        }
+      });
+    }else{
+      fetch(`/reviews/${user.id}/${filterReviews}`).then((r) => {
+        if (r.ok) {
+          r.json().then((rests) => setReviews(rests));
+        }
+      });
+    }
   
-}, [user])
-console.log('indie browse')
-console.log(reviews)
-console.log(user)
+}, [filterReviews])
 
   function handleChange(event){
-    console.log(event.target.className)
-    console.log(event.target.innerText)
+
     let review = reviews.find( (reviewObj) => reviewObj.id === parseInt(event.target.className))
   
     if(event.target.innerText === "Change"){
@@ -27,17 +32,28 @@ console.log(user)
     }else{
       changeView('delete', review)
     }
-  
+  }
+
+  function showAll(){
+    fetch(`/reviews/${user.id}`).then((r) => {
+      if (r.ok) {
+        r.json().then((rests) => setReviews(rests));
+      }
+    });
   }
 
   return (
     <div>
     <p>inside Browse</p>
     <div className="profileDiv">
-      <button onClick={handleChange}>Last 5 Reviews</button>
-      <button onClick={event => changeView('update')}>Change A Review</button>
-      <button>Delete A Review</button>
-      <h3></h3>
+      <button onClick={showAll}>Show All</button>
+      <label>Filter By:</label>
+      <select value={filterReviews} onChange={ e => setFilter(e.target.value)}>
+          <option value="1">---</option>
+          <option value="3">Low Rates (1-2)</option>
+          <option value="4">Medium Rates (3)</option>
+          <option value="6">High Rates (4-5)</option>
+        </select>
       {reviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
           <div className="container">
             <h4><b>{reviewObj.restaurant.name}</b></h4>

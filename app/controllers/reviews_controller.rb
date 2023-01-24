@@ -39,6 +39,18 @@ class ReviewsController < ApplicationController
     head :no_content
   end
 
+  def filter_reviews
+
+    if params[:filter] == "3"
+      reviews = Review.where("rate < ?", params[:filter])
+    elsif params[:filter] == "4"
+      reviews = Review.where("rate = 3")
+    else
+      reviews = Review.where("rate > 3")
+    end
+    render json: reviews, include: [:restaurant, :employee], status: :created 
+  end
+
 
 
   private
