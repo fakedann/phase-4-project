@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import UpdateReview from "./UpdateReview";
 
 function Browse({changeView, user}){
 
   const [reviews, setReviews] = useState([])
 
   useEffect( () => {
-    
+    console.log('we start fetch in browse')
     fetch(`/reviews/5/${user.id}`).then((r) => {
       if (r.ok) {
         r.json().then((rests) => setReviews(rests));
       }
     });
   
-}, [])
+}, [user])
 console.log('indie browse')
 console.log(reviews)
 console.log(user)

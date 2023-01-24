@@ -29,9 +29,9 @@ function App() {
   return (
     <div className="app">
       <Routes>
+      <Route exact path="/" element={<Login user={user} onLogin={setUser} setUser={setUser}/>}/>
         <Route exact path="/review" element={<CreateReview user={user}/>}/>
         <Route exact path="/discover" element={<Discover user={user}/>}/>
-        <Route exact path="/" element={<Login user={user} onLogin={setUser} setUser={setUser}/>}/>
       </Routes>
       <ToastContainer />
   </div>

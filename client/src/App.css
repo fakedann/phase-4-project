@@ -182,3 +182,13 @@ button.primary.ghost {
   margin: 0 auto;
   padding-right: 100px;
 }
+
+.successDiv {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 100px;
+}
+
+#deleteH2 {
+  text-align: center;
+}

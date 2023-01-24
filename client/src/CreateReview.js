@@ -7,7 +7,7 @@ function CreateReview( {user} ){
     rate: '',
     comments: '',
   });
-
+  const [submitted, setSubmit] = useState(false)
   const [errors, setErrors] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
 
@@ -39,7 +39,7 @@ function CreateReview( {user} ){
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((resp) => console.log(resp));
+        r.json().then( () => setSubmit(true));
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -48,7 +48,11 @@ function CreateReview( {user} ){
 
 
   return (
-    <div id="reviewDiv">
+    <div>
+      {submitted ? <div className="successDiv">
+<p>Review submmited succesfully!</p>
+<button onClick={ () => setSubmit(false)}>Go back</button>
+</div> : <div id="reviewDiv">
       <h3>Submit your review below:</h3>
       <form onSubmit={handleSubmit}>
               <div className="formElement">
@@ -83,6 +87,7 @@ function CreateReview( {user} ){
                 <p key={err}>{err}</p>
               ))}</div>
             </form>
+    </div>}
     </div>
     
   )

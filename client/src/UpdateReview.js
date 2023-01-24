@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function UpdateReview({review, user, changeView}){
 
@@ -46,7 +46,7 @@ function UpdateReview({review, user, changeView}){
 
   return (
     <div>
-      {submitted ? <div>
+      {submitted ? <div className="successDiv">
 <p>Succesful change!</p>
 <button onClick={comeBack}>Go back</button>
 </div> :<div id="updateDiv">

@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom"
 
 function NavBar(){
-  console.log('we are touching navbar')
   return (
     <nav className="nav">
       <ul>
