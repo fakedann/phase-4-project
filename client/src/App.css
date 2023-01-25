@@ -104,6 +104,11 @@ html {
   padding-top: 30px;
 }
 
+#reviewDiv p {
+  text-align: center;
+  padding-top: 20px;
+}
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -115,7 +120,18 @@ html {
 
 .profileDiv {
   text-align: center;
-  padding-left: 450px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.profileDiv button {
+  margin-right: 20px;
+}
+
+.cardContainers {
+  margin: 0 auto;
+  padding-top: 40px;
+  padding-left: 500px;
 }
 
 .card-container {
@@ -178,9 +194,10 @@ button.primary.ghost {
 
 #homeCollection {
   padding-top: 50px;
+  text-align: center;
   display: inline-block;
   margin: 0 auto;
-  padding-right: 100px;
+
 }
 
 .successDiv {
@@ -191,4 +208,9 @@ button.primary.ghost {
 
 #deleteH2 {
   text-align: center;
+}
+
+.loginp {
+  text-align: center;
+  padding-top: 80px;
 }

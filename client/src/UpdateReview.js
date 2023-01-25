@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function UpdateReview({review, user, changeView}){
+function UpdateReview({review, changeView}){
 
   const [formData, setForm] = useState({
     rate: '',
@@ -8,15 +8,12 @@ function UpdateReview({review, user, changeView}){
   })
   const [errors, setErrors] = useState([]);
   const [submitted, setSubmitted] = useState(false)
-  console.log('inside update')
-  console.log(review)
 
   function handleSubmit(event){
     event.preventDefault()
     if(parseInt(formData.rate) === review.rate && formData.comments === review.comments){
       setErrors(['The comment and rate submitted are the same as the ones already posted. Make sure to submit at least one new change.'])
     }else{
-      console.log(formData)
       fetch(`/review/${review.id}`, {
         method: "PATCH",
         headers: {
@@ -29,7 +26,6 @@ function UpdateReview({review, user, changeView}){
       }).then((r) => {
         if (r.ok) {
           r.json().then((resp) => {
-            // comeBack(resp)
             setSubmitted(true)
           });
         } else {

@@ -13,6 +13,12 @@ function Browse({changeView, user}){
           r.json().then((rests) => setReviews(rests));
         }
       });
+    }else if(filterReviews === "all"){
+      fetch(`/reviews/${user.id}`).then((r) => {
+        if (r.ok) {
+          r.json().then((rests) => setReviews(rests));
+        }
+      });
     }else{
       fetch(`/reviews/${user.id}/${filterReviews}`).then((r) => {
         if (r.ok) {
@@ -34,19 +40,19 @@ function Browse({changeView, user}){
     }
   }
 
-  function showAll(){
-    fetch(`/reviews/${user.id}`).then((r) => {
-      if (r.ok) {
-        r.json().then((rests) => setReviews(rests));
-      }
-    });
-  }
+  // function showAll(){
+  //   fetch(`/reviews/${user.id}`).then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((rests) => setReviews(rests));
+  //     }
+  //   });
+  // }
 
   return (
     <div>
-    <p>inside Browse</p>
     <div className="profileDiv">
-      <button onClick={showAll}>Show All</button>
+      <button onClick={ () => setFilter('all')}>Show All</button>
+      <button onClick={ () => setFilter('1')}>Show Last Five</button>
       <label>Filter By:</label>
       <select value={filterReviews} onChange={ e => setFilter(e.target.value)}>
           <option value="1">---</option>
@@ -54,7 +60,8 @@ function Browse({changeView, user}){
           <option value="4">Medium Rates (3)</option>
           <option value="6">High Rates (4-5)</option>
         </select>
-      {reviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
+        <div className="cardContainers">
+        {reviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
           <div className="container">
             <h4><b>{reviewObj.restaurant.name}</b></h4>
             <h6>Rate: {reviewObj.rate}</h6>
@@ -63,6 +70,7 @@ function Browse({changeView, user}){
             <button className={reviewObj.id} onClick={handleChange}>Delete</button>
           </div>
           </div>)}
+        </div>
     </div>
   </div> 
   )

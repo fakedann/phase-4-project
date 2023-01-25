@@ -42,11 +42,11 @@ class ReviewsController < ApplicationController
   def filter_reviews
 
     if params[:filter] == "3"
-      reviews = Review.where("rate < ?", params[:filter])
+      reviews = Review.where("rate < ? and employee_id = ?", params[:filter], params[:id])
     elsif params[:filter] == "4"
-      reviews = Review.where("rate = 3")
+      reviews = Review.where("rate = 3 and employee_id = ?", params[:id])
     else
-      reviews = Review.where("rate > 3")
+      reviews = Review.where("rate > 3 and employee_id = ?", params[:id])
     end
     render json: reviews, include: [:restaurant, :employee], status: :created 
   end

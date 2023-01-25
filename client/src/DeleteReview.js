@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function DeleteReview({review, user, changeView}){
+function DeleteReview({review, changeView}){
 
   const [deleted, setDeleted] = useState(false)
 
@@ -15,7 +15,7 @@ function DeleteReview({review, user, changeView}){
   return(<div>
       <h2 id="deleteH2">Confirm Delete Operation</h2>
     {deleted ? <div className="successDiv">
-<p>Succesful delete!</p>
+<p className="loginp">Succesful delete!</p>
 <button onClick={ () => changeView('')}>Go back</button>
 </div>: <div className="cardUp">
           <div className="container">

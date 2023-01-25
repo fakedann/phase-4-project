@@ -3,20 +3,19 @@ import Browse from "./Browse";
 import DeleteReview from "./DeleteReview";
 import UpdateReview from "./UpdateReview";
 
-function Discover( {user} ){
+function Collection( {user} ){
   
   const [filterPageView, setNewFilter] = useState('')
   const [review, setReview] = useState([])
-  console.log(user)
 
   if(filterPageView === "update"){
-    return <div><UpdateReview user={user} review={review} changeView={changeView}/></div>
+    return <div><UpdateReview review={review} changeView={changeView}/></div>
   }else if (filterPageView === "delete"){
-    return <DeleteReview user={user} review={review} changeView={changeView}/>
+    return <DeleteReview review={review} changeView={changeView}/>
   }else{
     return(
       <div>
-        {user !== null ? <Browse user={user} changeView={changeView}/>: <p>Please, log ing first</p>}
+        {user !== null ? <Browse user={user} changeView={changeView}/>: <p className="loginp">Please, log in first in the home page.</p>}
       </div>
     )
   }
@@ -29,4 +28,4 @@ function Discover( {user} ){
  
 }
 
-export default Discover
+export default Collection

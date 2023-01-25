@@ -6,14 +6,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from "react";
 import Login from './Login';
-import Discover from './Discover';
+import Collection from './Collection';
 
 function App() {
   const [user, setUser] = useState(null);
-  console.log(user)
-
  
-
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
@@ -30,8 +27,8 @@ function App() {
     <div className="app">
       <Routes>
       <Route exact path="/" element={<Login user={user} onLogin={setUser} setUser={setUser}/>}/>
-        <Route exact path="/review" element={<CreateReview user={user}/>}/>
-        <Route exact path="/discover" element={<Discover user={user}/>}/>
+        <Route exact path="/new-review" element={<CreateReview user={user}/>}/>
+        <Route exact path="/collection" element={<Collection user={user}/>}/>
       </Routes>
       <ToastContainer />
   </div>

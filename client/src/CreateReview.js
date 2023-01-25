@@ -11,8 +11,6 @@ function CreateReview( {user} ){
   const [errors, setErrors] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
 
-  console.log(user)
-
   useEffect( () => {
     fetch("/restaurants").then((r) => {
       if (r.ok) {
@@ -21,9 +19,7 @@ function CreateReview( {user} ){
     });
   }, [])
 
-  console.log('review')
-
-  if (!user) return <p>Please log in first</p>
+  if (!user) return <p className="loginp">Please, log in first in the home page.</p>
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -83,7 +79,7 @@ function CreateReview( {user} ){
                 />
               </div>
               <button id="submitReview" type="submit">Submit</button>
-              <div>{errors.map((err) => (
+              <div >{errors.map((err) => (
                 <p key={err}>{err}</p>
               ))}</div>
             </form>
