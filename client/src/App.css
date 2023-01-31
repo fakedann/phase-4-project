@@ -214,3 +214,13 @@ button.primary.ghost {
   text-align: center;
   padding-top: 80px;
 }
+
+#restForm {
+  margin-top: 20px;
+  margin-left: 600px;
+}
+
+.contactP {
+  margin-top: 20px;
+  text-align: center;
+}

@@ -35,15 +35,10 @@ function Restaurants({user}){
         }
       });
     }
+
+    setContact([])
   
 }, [filterReviews, selectedRest])
-
-  console.log(restaurants)
-  console.log(selectedRest)
-  console.log(reviews)
-  
-
- 
 
   if (!user) return <p className="loginp">Please, log in first in the home page.</p>
 
@@ -56,20 +51,19 @@ function Restaurants({user}){
   function contactInfo(){
     const arr = []
     let rest = restaurants.find( restObj => restObj.id === parseInt(selectedRest))
-    console.log(rest)
-    console.log(rest.employees)
-    rest.employees.map( emplObj => arr.push(emplObj.email))
-    const final = [...new Set(arr)];
-    console.log(final)
-    setContact(final)
+    if(rest){
+      rest.employees.map( emplObj => arr.push(emplObj.email))
+      const final = [...new Set(arr)];
+      setContact(final)
+    }
+  
   }
 
 
   return (
     <div>
       {switchPage === "" ? <div>
-      <button onClick={handleChange}>Change to form</button>
-      <button onClick={contactInfo}>show contact info</button> 
+      <button id="restForm" onClick={handleChange}>Add a New Restaurant</button>
       <div className="profileDiv">
       <label>Restaurant:</label>
                 <select id="restSelect" value={selectedRest} onChange={e => setSelectedRest(e.target.value)}>
@@ -94,8 +88,9 @@ function Restaurants({user}){
           </div>
           </div>)}
         </div>
+        <button onClick={contactInfo}>Show Reviewer's Contact Info</button> 
     </div>
-      {contact.map( obj => <p key={obj}>{obj}</p>)}
+      <div id="contactDiv">{contact.map( obj => <p className="contactP" key={obj}>{obj}</p>)}</div>
       </div>: <div className="successDiv">
       <p>Review submmited succesfully!</p>
       <button onClick={ () => setSwitch('')}>Go back</button>
