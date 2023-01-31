@@ -53,13 +53,6 @@ function Browse({changeView, user}){
     <div className="profileDiv">
       <button onClick={ () => setFilter('all')}>Show All</button>
       <button onClick={ () => setFilter('1')}>Show Last Five</button>
-      <label>Filter By:</label>
-      <select value={filterReviews} onChange={ e => setFilter(e.target.value)}>
-          <option value="1">---</option>
-          <option value="3">Low Rates (1-2)</option>
-          <option value="4">Medium Rates (3)</option>
-          <option value="6">High Rates (4-5)</option>
-        </select>
         <div className="cardContainers">
         {reviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
           <div className="container">

@@ -10,11 +10,16 @@ class ReviewsController < ApplicationController
 
   def index
     reviews = Review.all
-    render json: reviews.last(8), include: [:restaurant, :employee], status: :created
+    render json: reviews, include: [:restaurant, :employee], status: :created
   end
 
   def show
     reviews = Review.where(employee_id: params[:id])
+    render json: reviews, include: [:restaurant, :employee], status: :created
+  end
+
+  def show_rest
+    reviews = Review.where(restaurant_id: params[:id])
     render json: reviews, include: [:restaurant, :employee], status: :created
   end
 
@@ -42,11 +47,11 @@ class ReviewsController < ApplicationController
   def filter_reviews
 
     if params[:filter] == "3"
-      reviews = Review.where("rate < ? and employee_id = ?", params[:filter], params[:id])
+      reviews = Review.where("rate < ? and restaurant_id = ?", params[:filter], params[:id])
     elsif params[:filter] == "4"
-      reviews = Review.where("rate = 3 and employee_id = ?", params[:id])
+      reviews = Review.where("rate = 3 and restaurant_id = ?", params[:id])
     else
-      reviews = Review.where("rate > 3 and employee_id = ?", params[:id])
+      reviews = Review.where("rate > 3 and restaurant_id = ?", params[:id])
     end
     render json: reviews, include: [:restaurant, :employee], status: :created 
   end
