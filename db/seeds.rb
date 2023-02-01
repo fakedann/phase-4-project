@@ -14,21 +14,18 @@ Restaurant.create!([{
   phone: "3522456789",
   address: "4578 NE 2nd Ave",
   foodtype: "Mexican",
-  email: "elzafiro@gmail.com",
 },
 {
   name: "Momoyaki",
   phone: "3522412389",
   address: "1267 SW 31th PL",
   foodtype: "Vietnamese",
-  email: "momoyaki@gmail.com",
 },
 {
   name: "Gainesville Roadhouse",
   phone: "3522234389",
   address: "1222 NW 4TH AVE",
   foodtype: "Southern",
-  email: "momoyaki@gmail.com",
 }
 
 ])

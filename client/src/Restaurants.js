@@ -12,10 +12,11 @@ function Restaurants({user}){
   const [contact, setContact] = useState([])
 
   useEffect( () => {
-    console.log('inside fetch')
     fetch("/restaurants").then((r) => {
       if (r.ok) {
         r.json().then((rests) => setRestaurants(rests));
+      }else {
+        r.json().then((err) => setErrors(err.errors));
       }
     });
   }, [switchPage])
@@ -26,12 +27,16 @@ function Restaurants({user}){
       fetch(`/reviews_rest/${selectedRest}`).then((r) => {
         if (r.ok) {
           r.json().then((rests) => setReviews(rests));
+        }else {
+          r.json().then((err) => setErrors(err.errors));
         }
       });
     }else{
       fetch(`/reviews/${selectedRest}/${filterReviews}`).then((r) => {
         if (r.ok) {
           r.json().then((rests) => setReviews(rests));
+        }else {
+          r.json().then((err) => setErrors(err.errors));
         }
       });
     }
@@ -52,7 +57,12 @@ function Restaurants({user}){
     const arr = []
     let rest = restaurants.find( restObj => restObj.id === parseInt(selectedRest))
     if(rest){
-      rest.employees.map( emplObj => arr.push(emplObj.email))
+      rest.employees.map( emplObj => {
+        if(reviews.find( reviewObj => reviewObj.employee_id === emplObj.id)){
+          arr.push(`${emplObj.fullname}: ${emplObj.email}`)
+        }
+        return emplObj
+      })
       const final = [...new Set(arr)];
       setContact(final)
     }
@@ -88,11 +98,12 @@ function Restaurants({user}){
           </div>
           </div>)}
         </div>
-        <button onClick={contactInfo}>Show Reviewer's Contact Info</button> 
+        <button onClick={contactInfo}>Show Reviewer's Contact Info</button>
+        {errors} 
     </div>
       <div id="contactDiv">{contact.map( obj => <p className="contactP" key={obj}>{obj}</p>)}</div>
       </div>: <div className="successDiv">
-      <p>Review submmited succesfully!</p>
+      <p>New Restaurant submmited succesfully!</p>
       <button onClick={ () => setSwitch('')}>Go back</button>
       </div> }
     </div>

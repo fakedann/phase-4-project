@@ -76,6 +76,7 @@ function UpdateReview({review, changeView}){
                 />
           </div>
               <button id="submitReview" type="submit">Submit</button>
+              <button onClick={ () => changeView()}>Cancel Update</button>
               <div>{errors.map((err) => (
                 <p key={err}>{err}</p>
               ))}</div>
