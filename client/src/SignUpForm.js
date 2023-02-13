@@ -73,7 +73,7 @@ function SignUpForm({ onLogin}){
               <div className="formElement">
                 <label>Password (+5):</label>
                 <input
-                  type="text"
+                  type="password"
                   name="password"
                   onChange={handleChange}
                   value={formData.password}

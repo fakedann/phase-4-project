@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  # skip_before_action :authorized, only: [:index, :show]
+  skip_before_action :authorized, only: [:index, :show, :update, :destroy]
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   wrap_parameters format: []
 
@@ -31,8 +31,12 @@ class ReviewsController < ApplicationController
   def update
     review = Review.find_by(id: params[:id])
     if review
-      review.update!(rate: params[:rate], comments: params[:comments])
-      render json: review, include: [:restaurant, :employee], status: :created
+      if session[:employee_id] == review.employee_id
+        review.update!(rate: params[:rate], comments: params[:comments])
+        render json: review, include: [:restaurant, :employee], status: :created
+      else
+        render json: {error: "Unauthorized access. You are not the author for this review"}, status: :not_found
+      end
     else
       render json: {error: "Review not found"}, status: :not_found
     end
@@ -40,8 +44,17 @@ class ReviewsController < ApplicationController
 
   def destroy
     review = Review.find_by(id: params[:id])
-    review.destroy
-    head :no_content
+    if review
+      if session[:employee_id] == review.employee_id
+        review.destroy
+        head :no_content
+      else
+        render json: {error: "Unauthorized access. You are not the author for this review"}, status: :not_found
+      end
+    else
+      render json: {error: "Review not found"}, status: :not_found
+    end
+
   end
 
   def filter_reviews

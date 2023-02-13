@@ -50,7 +50,7 @@ function LoginForm({ onLogin }) {
               <div className="formElement">
                 <label>Password:</label>
                 <input
-                  type="text"
+                  type="password"
                   name="password"
                   onChange={handleChange}
                   value={formData.password}
