@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  skip_before_action :authorized, only: [:index, :show, :update, :destroy]
+  # skip_before_action :authorized, only: [:index, :show, :update, :destroy]
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   wrap_parameters format: []
 
@@ -68,7 +68,6 @@ class ReviewsController < ApplicationController
     end
     render json: reviews, include: [:restaurant, :employee], status: :created 
   end
-
 
 
   private
