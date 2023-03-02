@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   patch "/review/:id", to: "reviews#update"
   delete "/review/:id", to: "reviews#destroy"
   post "/restaurants", to: "restaurants#create"
-  get "/mostreviews", to: "employees#most_reviews"
+  get "/highestrating", to: "restaurants#highest"
+  get "/last", to: "reviews#lastt"
+  
 end

@@ -23,7 +23,7 @@ function RestaurantForm({setSwitch}){
 
   function checkSubmit(event){
       event.preventDefault()
-      const letters = /^[A-Za-z ]+$/
+      const letters = /^[A-Za-z ']+$/
       const address = /^[a-zA-Z 0-9_.-]*$/
       const phone = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/
   

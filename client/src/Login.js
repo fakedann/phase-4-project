@@ -15,7 +15,7 @@ function Login({ user, onLogin, setUser}) {
       }
     });
   
-  }, [])
+  }, [user])
   
 
   if (user) return (
@@ -31,7 +31,7 @@ function Login({ user, onLogin, setUser}) {
           </button>
         </div>
       </div>
-      <div id="homeCollection">
+      {/* <div id="homeCollection">
         <h2>Latest Reviews!</h2>
         {reviews.map( (reviewObj) => <div key={reviewObj.id} className="card">
           <div className="container">
@@ -41,7 +41,7 @@ function Login({ user, onLogin, setUser}) {
             <p>- {reviewObj.comments}</p>
           </div>
           </div>)}
-      </div>
+      </div> */}
     </div>
   );
 

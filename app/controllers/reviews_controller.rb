@@ -1,16 +1,25 @@
 class ReviewsController < ApplicationController
-  # skip_before_action :authorized, only: [:index, :show, :update, :destroy]
+  skip_before_action :authorized, only: [:index, :show, :update, :destroy, :lastt]
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   wrap_parameters format: []
+  ActionController::Parameters.permit_all_parameters = true
 
   def create
+    # byebug
     review = Review.create!(review_params)
     render json: review, include: [:restaurant], status: :created
   end
 
   def index
     reviews = Review.all
-    render json: reviews, include: [:restaurant, :employee], status: :created
+    render json: reviews
+  end
+
+  def lastt
+    review = Review.last
+    img = url_for(review.image)
+    review.comments = img
+    render json: review
   end
 
   def show
@@ -73,7 +82,7 @@ class ReviewsController < ApplicationController
   private
 
     def review_params
-      params.permit(:employee_id, :restaurant_id, :comments, :rate)
+      params.require(:review).permit(:employee_id, :restaurant_id, :comments, :rate, :image)
     end
 
     def render_not_found_response

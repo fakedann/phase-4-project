@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import {MyContext} from "./App"
 
-function CreateReview( {user} ){
+function CreateReview(  ){
 
   const [review, setReview] = useState({
     restaurant: '',
     rate: '',
     comments: '',
   });
+  const [avat, setAvat] = useState(null)
+  const [img, setImg] = useState()
   const [submitted, setSubmit] = useState(false)
   const [errors, setErrors] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
+
+
+  const {theme, setTheme, user} = useContext(MyContext)
+  setTheme('chao')
+  console.log(`succesful user ${user.fullname}`)
 
   useEffect( () => {
     fetch("/restaurants").then((r) => {
@@ -23,21 +31,32 @@ function CreateReview( {user} ){
 
   function handleSubmit(e) {
     e.preventDefault();
+    const formData = new FormData()
+    formData.append("review[image]", avat)
+    formData.append("review[employee_id]", user.id)
+    formData.append("review[restaurant_id]", review.restaurant)
+    formData.append("review[rate]", review.rate)
+    formData.append("review[comments]", review.comments)
+
     fetch("/review", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({employee_id: user.id,
-        restaurant_id: review.restaurant,
-        rate: review.rate,
-        comments: review.comments,
-      }),
+      body: formData,
     }).then((r) => {
       if (r.ok) {
         r.json().then( () => setSubmit(true));
       } else {
         r.json().then((err) => setErrors(err.errors));
+      }
+    });
+  }
+
+  function handleBlob(){
+    console.log('blob')
+    fetch("/last").then((r) => {
+      if (r.ok) {
+        r.json().then( resp => {
+          setImg(resp.image_url)
+        });
       }
     });
   }
@@ -78,11 +97,21 @@ function CreateReview( {user} ){
                   value={review.comments}
                 />
               </div>
+              <div className="formElement">
+                <label>Image:</label>
+                <input
+                  type="file"
+                  name="image"
+                  onChange={e => setAvat(e.target.files[0])}
+                />
+              </div>
               <button id="submitReview" type="submit">Submit</button>
               <div >{errors.map((err) => (
                 <p key={err}>{err}</p>
               ))}</div>
             </form>
+            <img id="testImg" src={img} alt="waiting for something"/>
+            <button onClick={handleBlob}>Check last</button>
     </div>}
     </div>
     

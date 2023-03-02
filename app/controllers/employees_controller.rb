@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  skip_before_action :authorized, only: [:create, :index, :most_reviews]
+  skip_before_action :authorized, only: [:create, :index]
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
   wrap_parameters format: []
 
@@ -16,9 +16,10 @@ class EmployeesController < ApplicationController
 
   def index
     employees = Employee.all
-    render json: employees, status: :created
+    render json: employees, include: [:reviews], status: :created
   end
 
+  
 
   private
 

@@ -1,5 +1,5 @@
 class RestaurantsController < ApplicationController
-  skip_before_action :authorized, only: [:index]
+  skip_before_action :authorized, only: [:index, :highest]
  
   def index
     rests = Restaurant.all
@@ -11,6 +11,22 @@ class RestaurantsController < ApplicationController
     restaurant = Restaurant.create!(restaurant_params)
     render json: restaurant, status: :created
   end
+
+  def highest
+    rests = Restaurant.all
+    max = rests.max_by(5) { |rest| rest.reviews.average(:rate)}
+
+    arr = max.map do |obj|
+      avg = {average: obj.reviews.average(:rate).to_f.round(2)}
+      results = obj.attributes.merge(avg)
+    end
+
+
+    render json: arr, status: :created
+  end
+
+
+
 
   private
 
